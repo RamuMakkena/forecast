@@ -21,7 +21,6 @@ function getGeoCodes(cityName){
     var responseBody = fetch(geoLocationEndPOint+"q="+cityName, {"method":"GET"})
     .then((response)=> {return response.json();})
     .catch((err)=> {console.error(err);} )
-    console.log(responseBody);
     return responseBody;
     
 }

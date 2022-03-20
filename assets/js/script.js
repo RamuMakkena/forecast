@@ -13,13 +13,15 @@ var cities = JSON.parse(localStorage.getItem("cities"));
         cities =[];
     }
     else{
-        console.log("number of cities : "+cities.length);
+        for(var i=0; i<cities.length;i++){
+            updateCity(cities[i]);
+        }
+        $("input").val(cities[cities.length-1]);
+        getWeatherForeCast(cities[cities.length-1]);
     }
-//function to get Geo Co-ordinates
 
 async function getWeatherForeCast(cityName){
     var geoResponse = await getGeoCodes(cityName);
-    console.log(geoResponse[0]);
     var response = await submitAPI(geoResponse[0].lat, geoResponse[0].lon);
     for(var i=0;i<response.length;i++){
         var weatherObject ={ 
@@ -32,14 +34,12 @@ async function getWeatherForeCast(cityName){
             icon: response[i].weather[0].icon
     };
     if(i==0){
-            console.log(weatherObject['date']);
             addRootInforamtion(weatherObject);
         }else{
             addWeatherCardInfo(weatherObject,i);
         }
     }
-    cities.push(cityName);
-    localStorage.setItem("cities", JSON.stringify(cities));
+    updateLocalStorage(cityName);
 }
 
 function addRootInforamtion(weatherObject){
@@ -61,3 +61,27 @@ function addWeatherCardInfo(weatherObject,number){
     $("#forecast-text-wind-value-"+number).text(weatherObject['wind']);
     $("#forecast-text-humidity-value-"+number).text(weatherObject['humidity']);
 }
+
+
+function updateCity(cityName){
+    var recentCityButton = $("<button>").addClass("btn btn-primary col-9 m-2");
+        recentCityButton.text(cityName);
+        $("#previousSearches").append(recentCityButton);
+}
+
+function updateLocalStorage(cityName){
+        cities = cities.filter((city) => city!=cityName );
+        cities.push(cityName);
+        localStorage.setItem("cities", JSON.stringify(cities));
+        cities.reverse();
+        $("#previousSearches").html("");
+        for(var i=0;i<cities.length;i++){
+            updateCity(cities[i]);
+        }
+}
+
+$("#previousSearches").on("click",".btn",function(){
+    var cityName = $(this).text();
+    $("input").val(cityName);
+    getWeatherForeCast(cityName);
+});
