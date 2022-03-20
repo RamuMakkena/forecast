@@ -52,15 +52,15 @@ function addRootInforamtion(weatherObject){
     var uvi = weatherObject['uvIndex'];
     $("#primary-uvi").text(uvi);
     if(uvi <=2){
-        $("#primary-uvi").addClass("uvi-green text-white rounded");
+        $("#primary-uvi").addClass("uvi-green text-white px-2 rounded");
     }else if(uvi>2 && uvi<=5){
-        $("#primary-uvi").addClass("uvi-yellow text-white rounded");
+        $("#primary-uvi").addClass("uvi-yellow text-dark px-2  rounded");
     }else if(uvi>5 && uvi<=7){
-        $("#primary-uvi").addClass("uvi-orange text-white rounded");
+        $("#primary-uvi").addClass("uvi-orange text-white  px-2 rounded");
     } else if(uvi>7 && uvi<=10){
-        $("#primary-uvi").addClass("uvi-red text-white rounded");
+        $("#primary-uvi").addClass("uvi-red text-white px-2 rounded");
     } else {
-        $("#primary-uvi").addClass("uvi-violet text-white rounded");
+        $("#primary-uvi").addClass("uvi-violet text-white px-2  rounded");
     }
 }
 
@@ -75,7 +75,7 @@ function addWeatherCardInfo(weatherObject,number){
 
 
 function updateCity(cityName){
-    var recentCityButton = $("<p>").addClass("prevSearchCity text-white rounded col-9 m-2");
+    var recentCityButton = $("<p>").addClass("prevSearchCity text-white rounded col-10 m-2");
         recentCityButton.text(cityName);
         $("#previousSearches").append(recentCityButton);
 }
