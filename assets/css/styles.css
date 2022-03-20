@@ -1,0 +1,23 @@
+.uvi-green{
+    background : green;
+}
+.uvi-yellow{
+    background : yellow;
+}
+.uvi-orange{
+    background: orange;
+}
+.uvi-red{
+    background : red;
+}
+.uvi-violet{
+    background : violet;
+}
+
+.prevSearchCity{
+    text-align: center;
+    background: gray;
+}
+.prevSearchCity:hover{
+    cursor : pointer;
+}

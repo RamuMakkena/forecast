@@ -16,7 +16,6 @@ var cities = JSON.parse(localStorage.getItem("cities"));
         for(var i=0; i<cities.length;i++){
             updateCity(cities[i]);
         }
-        $("input").val(cities[cities.length-1]);
         getWeatherForeCast(cities[cities.length-1]);
     }
 
@@ -50,7 +49,19 @@ function addRootInforamtion(weatherObject){
     $("#primary-temp").text(weatherObject['temp']);
     $("#primary-wind").text(weatherObject['wind']);
     $("#primary-humidity").text(weatherObject['humidity']);
-    $("#primary-uvi").text(weatherObject['uvIndex']);
+    var uvi = weatherObject['uvIndex'];
+    $("#primary-uvi").text(uvi);
+    if(uvi <=2){
+        $("#primary-uvi").addClass("uvi-green text-white rounded");
+    }else if(uvi>2 && uvi<=5){
+        $("#primary-uvi").addClass("uvi-yellow text-white rounded");
+    }else if(uvi>5 && uvi<=7){
+        $("#primary-uvi").addClass("uvi-orange text-white rounded");
+    } else if(uvi>7 && uvi<=10){
+        $("#primary-uvi").addClass("uvi-red text-white rounded");
+    } else {
+        $("#primary-uvi").addClass("uvi-violet text-white rounded");
+    }
 }
 
 function addWeatherCardInfo(weatherObject,number){
@@ -64,7 +75,7 @@ function addWeatherCardInfo(weatherObject,number){
 
 
 function updateCity(cityName){
-    var recentCityButton = $("<button>").addClass("btn btn-primary col-9 m-2");
+    var recentCityButton = $("<p>").addClass("prevSearchCity text-white rounded col-9 m-2");
         recentCityButton.text(cityName);
         $("#previousSearches").append(recentCityButton);
 }
@@ -80,7 +91,7 @@ function updateLocalStorage(cityName){
         }
 }
 
-$("#previousSearches").on("click",".btn",function(){
+$("#previousSearches").on("click",".prevSearchCity",function(){
     var cityName = $(this).text();
     $("input").val(cityName);
     getWeatherForeCast(cityName);
