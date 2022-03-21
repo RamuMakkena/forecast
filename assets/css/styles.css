@@ -21,3 +21,6 @@
 .prevSearchCity:hover{
     cursor : pointer;
 }
+.errorText{
+    color:red;
+}

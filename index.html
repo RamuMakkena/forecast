@@ -16,18 +16,19 @@
             <h2>Weather Dashboard</h2>
     </header>
     <section id="fullContainer" class="row mt-2">
-        <section id="leftSection" class="col-3">
-            <section id="cityInput" class="col-12 ">
-                <input type="text" placeholder="Enter City Name" id="cityNameField" class="col-10 m-2"/>
-                <button  id="searchButton" class="btn btn-primary col-10 m-2">Search</button>
+        <section id="leftSection" class="col-sm-12 col-md-3">
+            <section id="cityInput" class="col-sm-12 col-md-12 ">
+                <input type="text" placeholder="Enter City Name" id="cityNameField" class="col-md-10 m-2"/>
+                <button  id="searchButton" class="btn btn-primary col-md-10 m-2">Search</button>
+                <div id="validationError" class="errorText"></div>
             </section>
             <hr/>
-            <section id="previousSearches" class="col-12">
+            <section id="previousSearches" class=" col-sm-12 col-md-12">
 
             </section>
         </section>
-        <section id="rightSection" class="col-9 row">
-            <section id="todayWeather" class="col-12 border border-secondary">
+        <section id="rightSection" class="col-sm-12  col-md-9 row">
+            <section id="todayWeather" class="col-md-12 border border-secondary">
                 <h3><span id="cityNameDisplay"></span><span id="dateDisplay"></span><i id="primary-icon"></i></h3>
                 <div class="primaryDisplay">
                    <p> Temp : <span id="primary-temp"></span></p>
@@ -36,11 +37,11 @@
                    <p> UV Index : <span id="primary-uvi"></span></p>
                 </div>
             </section>
-            <section id="forecast" class="col-12">
+            <section id="forecast" class="col-md-12">
                 <h3>5-Day Forecast:</h3>
-                <div id="forecastCards" class="row col-12">
-                    <div class="card col-2 text-white bg-primary m-2 px-0" id="forecast-1">
-                        <div class="card-body col-12 mx-0 px-0">
+                <div id="forecastCards" class="row col-md-12">
+                    <div class="card col-md-2 text-white bg-primary m-2 px-0" id="forecast-1">
+                        <div class="card-body col-sm-12 col-md-12 mx-0 px-0">
                             <h5 class="card-title" id="forecast-title-1"></h5>
                             <p class="card-text" id="forecast-text-icon-1"><i id="forecast-icon-1"></i></p>
                             <p class="card-text" id="forecast-text-temp-1">Temp: <span id="forecast-text-temp-value-1"></span></p>
@@ -48,8 +49,8 @@
                             <p class="card-text" id="forecast-text-humidity-1">Humidity: <span id="forecast-text-humidity-value-1"></span></p>
                         </div>
                     </div>
-                    <div class="card col-2 text-white bg-primary m-2 px-0" id="forecast-2">
-                        <div class="card-body col-12 px-0">
+                    <div class="card col-sm-12  col-md-2 text-white bg-primary m-2 px-0" id="forecast-2">
+                        <div class="card-body col-md-12 px-0">
                             <h5 class="card-title" id="forecast-title-2"></h5>
                             <p class="card-text" id="forecast-text-icon-2"><i id="forecast-icon-2"></i></p>
                             <p class="card-text" id="forecast-text-temp-2">Temp: <span id="forecast-text-temp-value-2"></span></p>
@@ -57,8 +58,8 @@
                             <p class="card-text" id="forecast-text-humidity-2">Humidity: <span id="forecast-text-humidity-value-2"></span></p>
                         </div>
                     </div>
-                    <div class="card col-2  text-white bg-primary m-2 px-0" id="forecast-3">
-                        <div class="card-body col-12 px-0">
+                    <div class="card col-sm-12 col-md-2  text-white bg-primary m-2 px-0" id="forecast-3">
+                        <div class="card-body col-md-12 px-0">
                             <h5 class="card-title" id="forecast-title-3"></h5>
                             <p class="card-text" id="forecast-text-icon-3"><i id="forecast-icon-3"></i></p>
                             <p class="card-text" id="forecast-text-temp-3">Temp: <span id="forecast-text-temp-value-3"></span></p>
@@ -66,8 +67,8 @@
                             <p class="card-text" id="forecast-text-humidity-3">Humidity: <span id="forecast-text-humidity-value-3"></span></p>
                         </div>
                     </div>
-                    <div class="card col-2  text-white bg-primary  m-2 px-0" id="forecast-4">
-                        <div class="card-body col-12 px-0">
+                    <div class="card col-sm-12 col-md-2  text-white bg-primary  m-2 px-0" id="forecast-4">
+                        <div class="card-body col-md-12 px-0">
                             <h5 class="card-title" id="forecast-title-4"></h5>
                             <p class="card-text" id="forecast-text-icon-4"><i id="forecast-icon-4"></i></p>
                             <p class="card-text" id="forecast-text-temp-4">Temp: <span id="forecast-text-temp-value-4"></span></p>
@@ -75,8 +76,8 @@
                             <p class="card-text" id="forecast-text-humidity-4">Humidity: <span id="forecast-text-humidity-value-4"></span></p>
                         </div>
                     </div>
-                    <div class="card col-2 text-white bg-primary m-2 px-0" id="forecast-5">
-                        <div class="card-body col-12 px-0">
+                    <div class="card col-sm-12 col-md-2 text-white bg-primary m-2 px-0" id="forecast-5">
+                        <div class="card-body col-md-12 px-0">
                             <h5 class="card-title" id="forecast-title-5"></h5>
                             <p class="card-text" id="forecast-text-icon-5"><i id="forecast-icon-5"></i></p>
                             <p class="card-text" id="forecast-text-temp-5">Temp: <span id="forecast-text-temp-value-5"></span></p>

@@ -1,10 +1,16 @@
 var iconurl = "http://openweathermap.org/img/w/";
 $("#searchButton").on("click", function(){
     var cityName = $("#cityNameField").text();
+    if(!cityName)
+    {
+        $("#validationError").text("Please enter a valid City Name");
+        return false;
+    }
     getWeatherForeCast(cityName);
 })
 
 $("input").on("change", function(){
+    $("#validationError").text("");
     $(this).text($(this).val());
 })
 
@@ -21,6 +27,10 @@ var cities = JSON.parse(localStorage.getItem("cities"));
 
 async function getWeatherForeCast(cityName){
     var geoResponse = await getGeoCodes(cityName);
+    if(!geoResponse[0]){
+        $("#validationError").text("Apologies we could not find matching city. Please try another");
+        return false;
+    }
     var response = await submitAPI(geoResponse[0].lat, geoResponse[0].lon);
     for(var i=0;i<response.length;i++){
         var weatherObject ={ 
