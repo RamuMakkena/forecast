@@ -1,4 +1,5 @@
 var iconurl = "http://openweathermap.org/img/w/";
+// Event listener for search button
 $("#searchButton").on("click", function(){
     var cityName = $("#cityNameField").text();
     if(!cityName)
@@ -8,29 +9,32 @@ $("#searchButton").on("click", function(){
     }
     getWeatherForeCast(cityName);
 })
-
+//Whenever the field values chagned in city
 $("input").on("change", function(){
     $("#validationError").text("");
     $(this).text($(this).val());
 })
-
+//Getting cities from the local storage
 var cities = JSON.parse(localStorage.getItem("cities"));
     if(!cities){
         cities =[];
     }
     else{
+        //If local storage present, re assigning and displaying previous searches
         for(var i=0; i<cities.length;i++){
             updateCity(cities[i]);
         }
         getWeatherForeCast(cities[cities.length-1]);
     }
-
+//Getting weather forecast for cities
 async function getWeatherForeCast(cityName){
+    //First cehcking the geo coordinates for city given
     var geoResponse = await getGeoCodes(cityName);
     if(!geoResponse[0]){
         $("#validationError").text("Apologies we could not find matching city. Please try another");
         return false;
     }
+    //getting weather based on coordinates
     var response = await submitAPI(geoResponse[0].lat, geoResponse[0].lon);
     for(var i=0;i<response.length;i++){
         var weatherObject ={ 
@@ -43,14 +47,18 @@ async function getWeatherForeCast(cityName){
             icon: response[i].weather[0].icon
     };
     if(i==0){
+        //For first item, displaying the main section
             addRootInforamtion(weatherObject);
         }else{
+            //updating cards for rest
             addWeatherCardInfo(weatherObject,i);
         }
     }
+    // updating local storage
     updateLocalStorage(cityName);
 }
 
+//Displaying the main section of weather display
 function addRootInforamtion(weatherObject){
     $("#cityNameDisplay").text(weatherObject['cityName']);
     var finalIcon = iconurl+ weatherObject['icon'] + ".png";
@@ -73,7 +81,7 @@ function addRootInforamtion(weatherObject){
         $("#primary-uvi").addClass("uvi-violet text-white px-2  rounded");
     }
 }
-
+//Updating cards
 function addWeatherCardInfo(weatherObject,number){
     $("#forecast-title-"+number).text(weatherObject['date']);
     var finalIcon = iconurl+ weatherObject['icon'] + ".png";
@@ -83,13 +91,14 @@ function addWeatherCardInfo(weatherObject,number){
     $("#forecast-text-humidity-value-"+number).text(weatherObject['humidity']);
 }
 
-
+//Updating one city at a time in previous searches section
 function updateCity(cityName){
     var recentCityButton = $("<p>").addClass("prevSearchCity text-white rounded col-10 m-2");
         recentCityButton.text(cityName);
         $("#previousSearches").append(recentCityButton);
 }
 
+//updating local storage
 function updateLocalStorage(cityName){
         cities = cities.filter((city) => city!=cityName );
         cities.push(cityName);
@@ -101,6 +110,7 @@ function updateLocalStorage(cityName){
         }
 }
 
+// Event listener for previous searches
 $("#previousSearches").on("click",".prevSearchCity",function(){
     var cityName = $(this).text();
     $("input").val(cityName);
